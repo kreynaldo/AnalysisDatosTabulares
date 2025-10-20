@@ -48,11 +48,47 @@
 
 ---
 
-## **MÓDULO 2: ANÁLISIS EXPLORATORIO DE DATOS**
+## **MÓDULO 2: BASES DE DATOS RELACIONALES**
 
-### **2.1 Carga y Exploración Inicial de Datos**
+### **2.1 Fundamentos de Bases de Datos Relacionales**
 
-#### **Sesión 2.1.1: Pandas Básico**
+#### **Sesión 2.1.1: Conceptos de Bases de Datos Relacionales**
+- ¿Por qué bases de datos vs. archivos?
+- Modelo relacional: tablas, filas, columnas
+- Claves primarias y foráneas
+- **Ejercicio**: Diseñar esquema para tienda online
+
+#### **Sesión 2.1.2: Introducción a SQL**
+- SELECT básico: proyección y filtrado
+- WHERE, ORDER BY, LIMIT
+- **Dataset**: Base de datos de empleados (pequeña)
+- **Ejercicios progresivos**: Queries cada vez más complejas
+
+### **2.2 SQL Intermedio**
+
+#### **Sesión 2.2.1: Agregaciones y Agrupaciones**
+- GROUP BY y HAVING
+- Funciones de agregación: COUNT, SUM, AVG, MAX, MIN
+- **Ejercicios**: Análisis de ventas por región, tiempo, producto
+
+#### **Sesión 2.2.2: JOINs**
+- INNER, LEFT, RIGHT, FULL OUTER JOINs
+- Cuándo usar cada tipo
+- **Dataset**: Sistema multi-tabla (usuarios, pedidos, productos)
+- **Ejercicios progresivos**: Queries con múltiples tablas
+
+#### **Sesión 2.2.3: Subconsultas y CTEs**
+- Subconsultas en WHERE y SELECT
+- Common Table Expressions (WITH)
+- **Ejercicios**: Análisis complejos multi-nivel
+
+---
+
+## **MÓDULO 3: ANÁLISIS EXPLORATORIO DE DATOS**
+
+### **3.1 Carga y Exploración Inicial de Datos**
+
+#### **Sesión 3.1.1: Pandas Básico**
 - Series y DataFrames desde cero
 - Lectura de archivos CSV, Excel, JSON
 - Primeras exploraciones: `.info()`, `.describe()`, `.head()`
@@ -62,15 +98,15 @@
   - Explorar estructura
   - Identificar problemas
 
-#### **Sesión 2.1.2: dplyr y tidyr en R**
+#### **Sesión 3.1.2: dplyr y tidyr en R**
 - Filosofía tidy data
 - Funciones básicas: `select()`, `filter()`, `mutate()`, `summarise()`
 - Mismo dataset que en Python
 - **Ejercicios graduales**: Mismas tareas que con pandas
 
-### **2.2 Limpieza y Transformación de Datos**
+### **3.2 Limpieza y Transformación de Datos**
 
-#### **Sesión 2.2.1: Identificación de Problemas en Datos**
+#### **Sesión 3.2.1: Identificación de Problemas en Datos**
 - Datos faltantes: tipos y patrones
 - Duplicados: identificación y manejo
 - Outliers: detección visual y estadística
@@ -78,73 +114,37 @@
 - **Dataset "sucio"**: Datos reales con múltiples problemas
 - **Ejercicio**: Crear reporte de calidad de datos
 
-#### **Sesión 2.2.2: Técnicas de Limpieza en Python**
+#### **Sesión 3.2.2: Técnicas de Limpieza en Python**
 - Manejo de valores faltantes con pandas
 - Detección y remoción de duplicados
 - Transformación de tipos de datos
 - Normalización de texto
 - **Ejercicios progresivos**: Limpiar el dataset "sucio"
 
-#### **Sesión 2.2.3: Técnicas de Limpieza en R**
+#### **Sesión 3.2.3: Técnicas de Limpieza en R**
 - Funciones de tidyverse para limpieza
 - Manejo de NA values
 - Funciones de stringr para texto
 - **Ejercicios progresivos**: Mismo dataset, técnicas de R
 
-### **2.3 Estadística Descriptiva Básica**
+### **3.3 Estadística Descriptiva Básica**
 
-#### **Sesión 2.3.1: Conceptos Estadísticos Fundamentales**
+#### **Sesión 3.3.1: Conceptos Estadísticos Fundamentales**
 - Medidas de tendencia central: media, mediana, moda
 - Medidas de dispersión: varianza, desviación estándar, rango
 - Distribuciones básicas
 - Correlación vs. causalidad
 - **Ejercicios**: Calcular estadísticas manualmente y con código
 
-#### **Sesión 2.3.2: Estadística Descriptiva en Python**
+#### **Sesión 3.3.2: Estadística Descriptiva en Python**
 - Métodos de pandas para estadística
 - scipy.stats básico
 - **Ejercicio**: Análisis estadístico de dataset de ventas
 
-#### **Sesión 2.3.3: Estadística Descriptiva en R**
+#### **Sesión 3.3.3: Estadística Descriptiva en R**
 - Funciones base de R
 - Paquetes summary y psych
 - **Ejercicio**: Mismo análisis estadístico en R
-
----
-
-## **MÓDULO 3: BASES DE DATOS RELACIONALES**
-
-### **3.1 Fundamentos de Bases de Datos Relacionales**
-
-#### **Sesión 3.1.1: Conceptos de Bases de Datos Relacionales**
-- ¿Por qué bases de datos vs. archivos?
-- Modelo relacional: tablas, filas, columnas
-- Claves primarias y foráneas
-- **Ejercicio**: Diseñar esquema para tienda online
-
-#### **Sesión 3.1.2: Introducción a SQL**
-- SELECT básico: proyección y filtrado
-- WHERE, ORDER BY, LIMIT
-- **Dataset**: Base de datos de empleados (pequeña)
-- **Ejercicios progresivos**: Queries cada vez más complejas
-
-### **3.2 SQL Intermedio**
-
-#### **Sesión 3.2.1: Agregaciones y Agrupaciones**
-- GROUP BY y HAVING
-- Funciones de agregación: COUNT, SUM, AVG, MAX, MIN
-- **Ejercicios**: Análisis de ventas por región, tiempo, producto
-
-#### **Sesión 3.2.2: JOINs**
-- INNER, LEFT, RIGHT, FULL OUTER JOINs
-- Cuándo usar cada tipo
-- **Dataset**: Sistema multi-tabla (usuarios, pedidos, productos)
-- **Ejercicios progresivos**: Queries con múltiples tablas
-
-#### **Sesión 3.2.3: Subconsultas y CTEs**
-- Subconsultas en WHERE y SELECT
-- Common Table Expressions (WITH)
-- **Ejercicios**: Análisis complejos multi-nivel
 
 ---
 
