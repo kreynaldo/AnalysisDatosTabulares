@@ -31,21 +31,6 @@
 - Herramientas para cada etapa
 - **Ejercicio**: Mapear herramientas a etapas del proceso
 
-### **1.2 Primeros Pasos**
-
-#### **Sesión 1.2.1: R Básico**
-- Vectores y data.frames
-- Funciones básicas
-- Instalación y carga de paquetes
-- **Ejercicios**: Ejemplos didácticos
-
-#### **Sesión 1.2.1: Python Básico**
-- Variables y tipos de datos
-- Listas, diccionarios
-- Funciones básicas
-- Importación de librerías
-- **Ejercicios**: Ejemplos didácticos
-
 ---
 
 ## **MÓDULO 2: BASES DE DATOS RELACIONALES**
