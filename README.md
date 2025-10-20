@@ -15,6 +15,15 @@
 3. Comprender y aplicar conceptos estadísticos básicos
 4. Crear y evaluar modelos predictivos
 
+### **Herramientas**
+
+* LibreOffice / MS Excel
+* Visual Studio Code
+* R Studio
+* DBeaver
+* Base de Datos: DuckDB, PostgreSQL, MySQL
+* Otros: uv, git, R, Python 3.12+, Docker, ...
+
 ---
 
 ## **MÓDULO 1: INTRODUCCIÓN AL CURSO**
