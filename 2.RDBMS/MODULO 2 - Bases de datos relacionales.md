@@ -79,6 +79,12 @@ CREATE DATABASE northwind;
 # listar bases de datos existentes
 \l
 
+# Conectarse a una base de datos
+\c northwind
+
 # eliminar base de datos
 DROP DATABASE northwind;
 ```
+
+Usando `psql` se puede ejecutar codigo SQL como con cualquier otro cliente, pero usaremos DBeaver para hacerlo más amigable.
+
