@@ -82,6 +82,8 @@ CREATE DATABASE northwind;
 # Conectarse a una base de datos
 \c northwind
 
+\dt
+
 # eliminar base de datos
 DROP DATABASE northwind;
 ```
