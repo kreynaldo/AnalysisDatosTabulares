@@ -1,0 +1,625 @@
+---
+title: "Tutorial Básico de R"
+author: "Claude"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: bootstrap
+    toc: true
+    toc_float: true
+    code_folding: show
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 8, fig.height = 6)
+```
+
+# Introducción a R Base
+
+R es un lenguaje poderoso para análisis estadístico y ciencia de datos. En este tutorial aprenderemos los **fundamentos de R** usando solo las funciones que vienen incluidas en la instalación base, sin necesidad de instalar paquetes adicionales.
+
+## ¿Qué aprenderás?
+
+- Tipos de datos básicos en R
+- Operaciones con vectores, listas y data frames
+- Funciones básicas para análisis estadístico
+- Manipulación de datos con R base
+- Creación de gráficos básicos
+- Control de flujo (if, for, while)
+- Funciones personalizadas
+
+# Tipos de Datos Básicos
+
+R maneja varios tipos de datos fundamentales. Vamos a explorarlos uno por uno.
+
+## Vectores
+
+Los vectores son la estructura de datos más básica en R.
+
+```{r vectores}
+# Vectores numéricos
+numeros <- c(1, 2, 3, 4, 5)
+print("Vector numérico:")
+print(numeros)
+
+# Vectores de caracteres (strings)
+nombres <- c("Ana", "Carlos", "María", "Pedro", "Laura")
+print("Vector de caracteres:")
+print(nombres)
+
+# Vectores lógicos
+logicos <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+print("Vector lógico:")
+print(logicos)
+
+# Secuencias
+secuencia1 <- 1:10
+secuencia2 <- seq(0, 100, by = 10)
+print("Secuencias:")
+print(secuencia1)
+print(secuencia2)
+```
+
+## Operaciones básicas con vectores
+
+```{r operaciones-vectores}
+# Operaciones matemáticas
+precios <- c(100, 250, 75, 300, 150)
+print("Precios originales:")
+print(precios)
+
+# Aplicar descuento del 10%
+precios_descuento <- precios * 0.9
+print("Precios con descuento:")
+print(precios_descuento)
+
+# Sumar un valor fijo
+precios_con_iva <- precios_descuento * 1.21
+print("Precios con IVA:")
+print(precios_con_iva)
+
+# Estadísticas básicas
+print(paste("Precio promedio:", mean(precios)))
+print(paste("Precio mínimo:", min(precios)))
+print(paste("Precio máximo:", max(precios)))
+print(paste("Suma total:", sum(precios)))
+```
+
+## Indexación de vectores
+
+```{r indexacion}
+# Acceso por posición
+productos <- c("Laptop", "Mouse", "Teclado", "Monitor", "Auriculares")
+
+print("Primer producto:")
+print(productos[1])
+
+print("Productos 2 al 4:")
+print(productos[2:4])
+
+print("Productos seleccionados:")
+print(productos[c(1, 3, 5)])
+
+# Acceso por condición
+ventas_dia <- c(120, 80, 200, 50, 300)
+print("Ventas mayores a 100:")
+print(ventas_dia[ventas_dia > 100])
+
+# Nombres de elementos
+names(ventas_dia) <- productos
+print("Ventas por producto:")
+print(ventas_dia)
+```
+
+# Listas y Data Frames
+
+## Listas
+
+Las listas pueden contener diferentes tipos de datos.
+
+```{r listas}
+# Crear una lista
+empleado <- list(
+  nombre = "Ana García",
+  edad = 28,
+  salario = 45000,
+  activo = TRUE,
+  departamentos = c("Ventas", "Marketing")
+)
+
+print("Información del empleado:")
+print(empleado)
+
+# Acceso a elementos de la lista
+print(paste("Nombre:", empleado$nombre))
+print(paste("Edad:", empleado[["edad"]]))
+print("Departamentos:")
+print(empleado$departamentos)
+```
+
+## Data Frames
+
+Los data frames son la estructura principal para datos tabulares.
+
+```{r dataframes}
+# Crear un data frame
+set.seed(123)  # Para reproducibilidad
+
+# Crear datos de ejemplo
+empleados <- data.frame(
+  nombre = c("Ana", "Carlos", "María", "Pedro", "Laura"),
+  edad = c(28, 35, 42, 29, 38),
+  salario = c(45000, 52000, 48000, 41000, 55000),
+  departamento = c("Ventas", "IT", "RRHH", "Ventas", "IT"),
+  activo = c(TRUE, TRUE, FALSE, TRUE, TRUE),
+  stringsAsFactors = FALSE
+)
+
+print("Data frame de empleados:")
+print(empleados)
+
+# Información del data frame
+print("Estructura del data frame:")
+str(empleados)
+
+print("Dimensiones:")
+print(paste("Filas:", nrow(empleados)))
+print(paste("Columnas:", ncol(empleados)))
+
+# Primeras y últimas filas
+print("Primeras 3 filas:")
+head(empleados, 3)
+
+print("Últimas 2 filas:")
+tail(empleados, 2)
+```
+
+# Manipulación de Data Frames
+
+## Selección de datos
+
+```{r seleccion}
+# Seleccionar columnas
+print("Solo nombres y salarios:")
+print(empleados[, c("nombre", "salario")])
+
+# Seleccionar filas
+print("Empleados activos:")
+empleados_activos <- empleados[empleados$activo == TRUE, ]
+print(empleados_activos)
+
+print("Empleados de IT:")
+empleados_it <- empleados[empleados$departamento == "IT", ]
+print(empleados_it)
+
+print("Empleados con salario mayor a 45000:")
+salarios_altos <- empleados[empleados$salario > 45000, ]
+print(salarios_altos[, c("nombre", "salario")])
+```
+
+## Agregar y modificar datos
+
+```{r modificar-datos}
+# Agregar una nueva columna
+empleados$bonus <- empleados$salario * 0.1
+print("Data frame con bonus:")
+print(empleados[, c("nombre", "salario", "bonus")])
+
+# Modificar valores
+empleados$salario[empleados$departamento == "IT"] <- empleados$salario[empleados$departamento == "IT"] * 1.05
+print("Salarios después del aumento para IT:")
+print(empleados[, c("nombre", "departamento", "salario")])
+
+# Agregar una nueva fila
+nuevo_empleado <- data.frame(
+  nombre = "Roberto",
+  edad = 31,
+  salario = 47000,
+  departamento = "Finanzas",
+  activo = TRUE,
+  bonus = 4700
+)
+
+empleados <- rbind(empleados, nuevo_empleado)
+print("Data frame con nuevo empleado:")
+print(empleados)
+```
+
+# Funciones Estadísticas Básicas
+
+## Estadísticas descriptivas
+
+```{r estadisticas}
+# Trabajar con los salarios
+salarios <- empleados$salario
+
+print("Estadísticas descriptivas de salarios:")
+print(paste("Media:", round(mean(salarios), 2)))
+print(paste("Mediana:", median(salarios)))
+print(paste("Desviación estándar:", round(sd(salarios), 2)))
+print(paste("Varianza:", round(var(salarios), 2)))
+print(paste("Rango:", paste(min(salarios), "-", max(salarios))))
+
+# Cuartiles
+print("Resumen de cinco números:")
+print(summary(salarios))
+
+# Cuantiles específicos
+print("Cuantiles:")
+print(quantile(salarios, c(0.25, 0.5, 0.75, 0.9)))
+```
+
+## Análisis por grupos
+
+```{r analisis-grupos}
+# Análisis por departamento usando funciones base
+departamentos_unicos <- unique(empleados$departamento)
+
+print("Análisis por departamento:")
+for (dept in departamentos_unicos) {
+  dept_data <- empleados[empleados$departamento == dept, ]
+  cat("\n--- Departamento:", dept, "---\n")
+  cat("Número de empleados:", nrow(dept_data), "\n")
+  cat("Salario promedio:", round(mean(dept_data$salario), 2), "\n")
+  cat("Edad promedio:", round(mean(dept_data$edad), 2), "\n")
+}
+
+# Tabla de contingencia
+print("\nTabla de contingencia - Departamento vs Estado:")
+tabla_contingencia <- table(empleados$departamento, empleados$activo)
+print(tabla_contingencia)
+```
+
+# Funciones de Agregación
+
+## Funciones apply
+
+```{r apply}
+# Crear una matriz para demostrar apply
+set.seed(456)
+ventas_matriz <- matrix(runif(20, 100, 1000), nrow = 4, ncol = 5)
+rownames(ventas_matriz) <- c("Ene", "Feb", "Mar", "Abr")
+colnames(ventas_matriz) <- c("Producto_A", "Producto_B", "Producto_C", "Producto_D", "Producto_E")
+
+print("Matriz de ventas mensuales:")
+print(round(ventas_matriz, 2))
+
+# Apply por filas (meses)
+print("Ventas totales por mes:")
+ventas_mes <- apply(ventas_matriz, 1, sum)
+print(round(ventas_mes, 2))
+
+# Apply por columnas (productos)
+print("Ventas totales por producto:")
+ventas_producto <- apply(ventas_matriz, 2, sum)
+print(round(ventas_producto, 2))
+
+# Apply con otras funciones
+print("Promedio por producto:")
+promedio_producto <- apply(ventas_matriz, 2, mean)
+print(round(promedio_producto, 2))
+```
+
+## Funciones tapply, lapply, sapply
+
+```{r otras-apply}
+# tapply - aplicar función por grupos
+print("Salario promedio por departamento usando tapply:")
+salario_por_dept <- tapply(empleados$salario, empleados$departamento, mean)
+print(round(salario_por_dept, 2))
+
+# lapply - aplicar función a listas
+numeros_lista <- list(a = 1:5, b = 6:10, c = 11:15)
+print("Suma de cada elemento de la lista:")
+sumas <- lapply(numeros_lista, sum)
+print(sumas)
+
+# sapply - versión simplificada de lapply
+print("Promedio de cada elemento (usando sapply):")
+promedios <- sapply(numeros_lista, mean)
+print(promedios)
+```
+
+# Control de Flujo
+
+## Condicionales (if/else)
+
+```{r condicionales}
+# Función para categorizar salarios
+categorizar_salario <- function(salario) {
+  if (salario < 45000) {
+    return("Bajo")
+  } else if (salario < 52000) {
+    return("Medio")
+  } else {
+    return("Alto")
+  }
+}
+
+# Aplicar la función
+empleados$categoria_salario <- sapply(empleados$salario, categorizar_salario)
+print("Empleados con categoría de salario:")
+print(empleados[, c("nombre", "salario", "categoria_salario")])
+```
+
+## Bucles (for, while)
+
+```{r bucles}
+# Bucle for
+print("Bucle for - procesando empleados:")
+for (i in 1:nrow(empleados)) {
+  nombre <- empleados$nombre[i]
+  salario <- empleados$salario[i]
+  cat("Empleado:", nombre, "- Salario:", salario, "\n")
+  
+  if (i >= 3) {  # Solo mostrar los primeros 3
+    cat("...(continuando con el resto)\n")
+    break
+  }
+}
+
+# Bucle while
+print("\nBucle while - buscando empleado con salario > 50000:")
+i <- 1
+encontrado <- FALSE
+while (i <= nrow(empleados) && !encontrado) {
+  if (empleados$salario[i] > 50000) {
+    cat("Encontrado:", empleados$nombre[i], "con salario", empleados$salario[i], "\n")
+    encontrado <- TRUE
+  }
+  i <- i + 1
+}
+```
+
+# Funciones Personalizadas
+
+```{r funciones}
+# Función simple
+calcular_bonus <- function(salario, porcentaje = 0.1) {
+  bonus <- salario * porcentaje
+  return(bonus)
+}
+
+print("Ejemplo de función personalizada:")
+print(paste("Bonus para salario 50000:", calcular_bonus(50000)))
+print(paste("Bonus del 15% para salario 60000:", calcular_bonus(60000, 0.15)))
+
+# Función más compleja
+analisis_empleado <- function(df, departamento_filtro = NULL) {
+  if (!is.null(departamento_filtro)) {
+    df <- df[df$departamento == departamento_filtro, ]
+  }
+  
+  resultado <- list(
+    total_empleados = nrow(df),
+    salario_promedio = mean(df$salario),
+    salario_mediano = median(df$salario),
+    edad_promedio = mean(df$edad),
+    empleados_activos = sum(df$activo)
+  )
+  
+  return(resultado)
+}
+
+print("Análisis general:")
+analisis_general <- analisis_empleado(empleados)
+print(analisis_general)
+
+print("\nAnálisis departamento IT:")
+analisis_it <- analisis_empleado(empleados, "IT")
+print(analisis_it)
+```
+
+# Gráficos Básicos
+
+R base incluye funciones para crear gráficos básicos muy útiles.
+
+```{r graficos, fig.width=10, fig.height=8}
+# Configurar para mostrar múltiples gráficos
+par(mfrow = c(2, 2))
+
+# Histograma
+hist(empleados$salario, 
+     main = "Distribución de Salarios", 
+     xlab = "Salario", 
+     ylab = "Frecuencia",
+     col = "lightblue",
+     border = "black")
+
+# Diagrama de dispersión
+plot(empleados$edad, empleados$salario,
+     main = "Edad vs Salario",
+     xlab = "Edad",
+     ylab = "Salario",
+     col = "red",
+     pch = 19)
+
+# Agregar línea de tendencia
+abline(lm(salario ~ edad, data = empleados), col = "blue", lwd = 2)
+
+# Gráfico de barras
+barplot(table(empleados$departamento),
+        main = "Empleados por Departamento",
+        xlab = "Departamento",
+        ylab = "Número de Empleados",
+        col = c("lightgreen", "lightcoral", "lightyellow"))
+
+# Boxplot
+boxplot(salario ~ departamento, 
+        data = empleados,
+        main = "Salarios por Departamento",
+        xlab = "Departamento",
+        ylab = "Salario",
+        col = "lightpink")
+
+# Restaurar configuración de gráficos
+par(mfrow = c(1, 1))
+```
+
+# Trabajo con Fechas y Strings
+
+## Fechas básicas
+
+```{r fechas}
+# Trabajar con fechas
+fecha_actual <- Sys.Date()
+print(paste("Fecha actual:", fecha_actual))
+
+# Crear fechas
+fechas <- as.Date(c("2023-01-01", "2023-06-15", "2023-12-31"))
+print("Fechas creadas:")
+print(fechas)
+
+# Operaciones con fechas
+diferencia <- fecha_actual - fechas[1]
+print(paste("Días desde el 1 de enero 2023:", diferencia))
+
+# Formato de fechas
+print("Diferentes formatos de fecha:")
+print(format(fecha_actual, "%d/%m/%Y"))
+print(format(fecha_actual, "%B %d, %Y"))
+print(format(fecha_actual, "%A"))
+```
+
+## Manipulación de strings
+
+```{r strings}
+# Operaciones básicas con strings
+nombres_completos <- c("Ana García López", "Carlos Martín Silva", "María Fernández")
+
+print("Nombres originales:")
+print(nombres_completos)
+
+# Longitud de strings
+print("Longitud de cada nombre:")
+print(nchar(nombres_completos))
+
+# Convertir a mayúsculas/minúsculas
+print("En mayúsculas:")
+print(toupper(nombres_completos))
+
+print("En minúsculas:")
+print(tolower(nombres_completos))
+
+# Extraer partes de strings
+print("Primeros nombres (primeros 10 caracteres):")
+print(substr(nombres_completos, 1, 10))
+
+# Dividir strings
+print("Dividir nombres:")
+nombres_divididos <- strsplit(nombres_completos[1], " ")
+print(nombres_divididos)
+
+# Pegar strings
+nuevo_nombre <- paste("Dr.", nombres_completos[1])
+print(paste("Nombre con título:", nuevo_nombre))
+```
+
+# Lectura y Escritura de Archivos
+
+```{r archivos, eval=FALSE}
+# Escribir datos a CSV
+write.csv(empleados, "empleados.csv", row.names = FALSE)
+print("Archivo empleados.csv creado")
+
+# Leer datos de CSV
+empleados_leidos <- read.csv("empleados.csv", stringsAsFactors = FALSE)
+print("Datos leídos desde CSV:")
+head(empleados_leidos)
+
+# Escribir a archivo de texto
+writeLines(c("Reporte de empleados", 
+             paste("Total empleados:", nrow(empleados)),
+             paste("Salario promedio:", round(mean(empleados$salario), 2))), 
+           "reporte.txt")
+
+# Leer archivo de texto
+reporte <- readLines("reporte.txt")
+print("Contenido del reporte:")
+print(reporte)
+```
+
+# Análisis Final: Proyecto Integrador
+
+Vamos a combinar todo lo aprendido en un análisis completo.
+
+```{r proyecto-integrador}
+# Crear un dataset más complejo para el análisis final
+set.seed(789)
+n_empleados <- 50
+
+empleados_completo <- data.frame(
+  id = 1:n_empleados,
+  nombre = paste("Empleado", 1:n_empleados),
+  departamento = sample(c("Ventas", "IT", "RRHH", "Finanzas", "Marketing"), n_empleados, replace = TRUE),
+  edad = sample(22:65, n_empleados, replace = TRUE),
+  años_empresa = sample(1:20, n_empleados, replace = TRUE),
+  salario_base = sample(35000:80000, n_empleados, replace = TRUE),
+  activo = sample(c(TRUE, FALSE), n_empleados, replace = TRUE, prob = c(0.9, 0.1))
+)
+
+# Agregar columnas calculadas
+empleados_completo$salario_total <- empleados_completo$salario_base + 
+  (empleados_completo$años_empresa * 1000)  # Bonus por antigüedad
+
+empleados_completo$categoria_edad <- ifelse(empleados_completo$edad < 30, "Joven",
+                                   ifelse(empleados_completo$edad < 50, "Medio", "Senior"))
+
+# Análisis completo
+print("=== ANÁLISIS COMPLETO DE EMPLEADOS ===")
+
+# 1. Estadísticas generales
+cat("\n1. ESTADÍSTICAS GENERALES\n")
+cat("Total de empleados:", nrow(empleados_completo), "\n")
+cat("Empleados activos:", sum(empleados_completo$activo), "\n")
+cat("Salario promedio:", round(mean(empleados_completo$salario_total), 2), "\n")
+cat("Edad promedio:", round(mean(empleados_completo$edad), 2), "\n")
+
+# 2. Análisis por departamento
+cat("\n2. ANÁLISIS POR DEPARTAMENTO\n")
+for (dept in unique(empleados_completo$departamento)) {
+  dept_data <- empleados_completo[empleados_completo$departamento == dept, ]
+  cat("\nDepartamento:", dept, "\n")
+  cat("  Empleados:", nrow(dept_data), "\n")
+  cat("  Salario promedio:", round(mean(dept_data$salario_total), 2), "\n")
+  cat("  Edad promedio:", round(mean(dept_data$edad), 2), "\n")
+  cat("  Años promedio en empresa:", round(mean(dept_data$años_empresa), 2), "\n")
+}
+
+# 3. Top performers
+cat("\n3. TOP PERFORMERS\n")
+top_salarios <- empleados_completo[order(empleados_completo$salario_total, decreasing = TRUE), ][1:5, ]
+print(top_salarios[, c("nombre", "departamento", "salario_total")])
+
+# 4. Análisis de correlaciones
+cat("\n4. CORRELACIÓN EDAD-SALARIO\n")
+correlacion <- cor(empleados_completo$edad, empleados_completo$salario_total)
+cat("Correlación edad-salario:", round(correlacion, 3), "\n")
+
+# 5. Resumen final
+cat("\n5. INSIGHTS PRINCIPALES\n")
+dept_mejor_pagado <- names(sort(tapply(empleados_completo$salario_total, 
+                                      empleados_completo$departamento, mean), 
+                               decreasing = TRUE))[1]
+cat("Departamento mejor pagado:", dept_mejor_pagado, "\n")
+
+empleado_mas_antiguo <- empleados_completo[which.max(empleados_completo$años_empresa), ]
+cat("Empleado más antiguo:", empleado_mas_antiguo$nombre, 
+    "con", empleado_mas_antiguo$años_empresa, "años\n")
+```
+
+# Conclusión
+
+¡Felicitaciones! Has completado el tutorial básico de R. Has aprendido los fundamentos esenciales
+
+## Conceptos cubiertos:
+
+- **Tipos de datos**: vectores, listas, data frames
+- **Manipulación de datos**: indexación, filtrado, agregación
+- **Estadísticas básicas**: media, mediana, desviación estándar
+- **Control de flujo**: if/else, bucles for y while
+- **Funciones**: creación y uso de funciones personalizadas
+- **Gráficos básicos**: histogramas, scatter plots, boxplots
+- **Trabajo con strings y fechas**
+- **Funciones apply**: apply, lapply, sapply, tapply

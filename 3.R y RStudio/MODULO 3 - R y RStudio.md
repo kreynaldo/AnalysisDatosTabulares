@@ -24,7 +24,7 @@ Temas clave:
 
 Tip: mostrar rápidamente la interfaz de RStudio (los 4 paneles) y decir qué hace cada uno.
 
-## 2️⃣ Primeros pasos prácticos — 10-15 min
+## 2️⃣ Primeros pasos prácticos
 
 **Objetivo**: demostrar que R es accesible.
 

@@ -23,14 +23,16 @@ library(tidyverse)
 # ============================================================================
 
 # Vamos a crear un dataset de ejemplo sobre ventas de una tienda
-set.seed(123)  # Para resultados reproducibles
+
+set.seed(123)  # Para que los resultados sean reproducibles
+
+productos = c("Laptop", "Mouse", "Teclado", "Monitor", "Auriculares")
+vendedores = c("Ana", "Carlos", "María", "Pedro", "Laura")
 
 ventas <- tibble(
   fecha = seq(as.Date("2023-01-01"), as.Date("2023-12-31"), by = "day"),
-  producto = sample(c("Laptop", "Mouse", "Teclado", "Monitor", "Auriculares"), 
-                    365, replace = TRUE),
-  vendedor = sample(c("Ana", "Carlos", "María", "Pedro", "Laura"), 
-                    365, replace = TRUE),
+  producto = sample(productos, 365, replace = TRUE),
+  vendedor = sample(vendedores, 365, replace = TRUE),
   cantidad = sample(1:10, 365, replace = TRUE),
   precio_unitario = case_when(
     producto == "Laptop" ~ runif(365, 800, 1200),
@@ -46,6 +48,26 @@ ventas <- tibble(
     venta_total = cantidad * precio_unitario
   )
 
+# La expresión: valor %>% function(params)
+# Es equivalente a: function(valor, params)
+# Ejemplo:
+ventas %>% head(5)
+# Es igual a:
+head(ventas, 5)
+
+# El operador: %>% es idéntico al operador: |>
+ventas |> head(5)
+
+# El operador de asignación: <- se puede remplazar por el signo =
+ejemplo = ventas |> head(5)
+
+ejemplo
+
+ejemplo = NA # anula un objeto
+
+rm(ejemplo) # elimina fisicamente la variable del entorno
+
+
 # Veamos nuestros datos
 print("Primeras 10 filas de nuestro dataset:")
 head(ventas, 10)
@@ -60,13 +82,11 @@ print("\n=== FUNCIONES BÁSICAS DE DPLYR ===")
 
 # 3.1 SELECT - Seleccionar columnas
 print("\n3.1 SELECT - Seleccionar columnas específicas:")
-ventas_basico <- ventas %>%
-  select(fecha, producto, venta_total)
+ventas_basico = ventas |> select(fecha, producto, venta_total)
 head(ventas_basico, 5)
 
 # Seleccionar por rango de columnas
-ventas_rango <- ventas %>%
-  select(producto:precio_unitario)
+ventas_rango = ventas |> select(producto : precio_unitario)
 head(ventas_rango, 3)
 
 # 3.2 FILTER - Filtrar filas
