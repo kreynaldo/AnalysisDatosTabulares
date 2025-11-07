@@ -93,8 +93,8 @@ ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) +
 **Objetivo**: dejar a los asistentes con vías para seguir aprendiendo.
 
 * Recursos recomendados:
-    * https://r4ds.hadley.nz/
-    * https://posit.co/learn
-    * https://rstudio.cloud
-* Comunidades: R-Ladies, RStudio Community, Stack Overflow.
+    * [R para Principiantes en PDF](https://cran.r-project.org/doc/contrib/rdebuts_es.pdf)
+    * [R para Principiantes online](https://bookdown.org/jboscomendoza/r-principiantes4/)
+    * [R Para Ciencia de Datos](https://es.r4ds.hadley.nz/)
+* Comunidades: R-Ladies, RStudio Community.
 * Mostrar cómo abrir la ayuda (?mean, help(package = "dplyr")).
