@@ -1,0 +1,6 @@
+"nombre","edad","salario","departamento","activo","bonus","categoria_salario"
+"Ana",28,45000,"Ventas",TRUE,4500,"Medio"
+"Carlos",35,54600,"IT",TRUE,5200,"Alto"
+"María",42,48000,"RRHH",FALSE,4800,"Medio"
+"Pedro",29,41000,"Ventas",TRUE,4100,"Bajo"
+"Laura",38,57750,"IT",TRUE,5500,"Alto"

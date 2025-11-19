@@ -40,6 +40,8 @@ Los vectores son la estructura de datos más básica en R.
 ```{r vectores}
 # Vectores numéricos
 numeros <- c(1, 2, 3, 4, 5)
+c(1, 2, 3, 4, 5) -> numeros2
+numeros3 = c(1, 2, 3, 4, 5)
 print("Vector numérico:")
 print(numeros)
 
@@ -59,6 +61,19 @@ secuencia2 <- seq(0, 100, by = 10)
 print("Secuencias:")
 print(secuencia1)
 print(secuencia2)
+```
+
+## Ejemplo de Calculo
+
+```{r}
+set.seed(123)
+errores = 100 * runif(n=100)
+rmse = sqrt(mean(errores**2))
+mse = mean(errores**2)
+print(errores)
+print(rmse)
+print(mse)
+
 ```
 
 ## Operaciones básicas con vectores
@@ -523,10 +538,14 @@ print(paste("Nombre con título:", nuevo_nombre))
 write.csv(empleados, "empleados.csv", row.names = FALSE)
 print("Archivo empleados.csv creado")
 
+rm(empleados)
+
 # Leer datos de CSV
 empleados_leidos <- read.csv("empleados.csv", stringsAsFactors = FALSE)
 print("Datos leídos desde CSV:")
 head(empleados_leidos)
+
+empleados = empleados_leidos
 
 # Escribir a archivo de texto
 writeLines(c("Reporte de empleados", 
